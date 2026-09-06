@@ -1,0 +1,36 @@
+# Dependencias
+node_modules/
+
+# Credenciales y Secretos Locales
+supabase_credentials.json
+.env
+.env.local
+.env.*.local
+sabi-payment-server/.env
+
+# Temporales de Supabase y Deno
+.temp/
+supabase/.temp/
+
+# Archivos de diagnóstico y registros (Logs)
+*.log
+edge_diag.log
+edge_diag_http.log
+
+# Datos de usuario de navegación de Chrome
+chrome_user_data/
+chrome_user_data_http/
+
+# Archivos del Sistema Operativo
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Archivos de diagnóstico y transcripciones temporales
+style_view_*.txt
+part_*.txt
+recovered_*.txt
+diff_output.txt
+scratch/
+.hermes/
+
