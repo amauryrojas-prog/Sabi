@@ -7130,6 +7130,7 @@ function switchServiceTab(tab) {
     renderSportsContent();
   } else if (tab === 'comercio') {
     renderComercioStats();
+    if (typeof checkBusinessCouponState === 'function') checkBusinessCouponState();
   } else if (tab === 'llegadas') {
     renderArrivalsTab();
   } else if (tab === 'cursos') {
@@ -24815,70 +24816,259 @@ const SABI_CURSOS_DATA = [
   {
     id: "curso-1",
     category: "business",
-    title: "Inteligencia Artificial para Negocios y Productividad (Udemy)",
-    description: "Domina ChatGPT, Midjourney y automatizaciones con IA para potenciar tus ventas y eficiencia administrativa en Aruba.",
-    price: 24.99,
-    duration: "12 hrs",
-    lectures: 6,
-    rating: 4.8,
-    lecturesList: ["Fundamentos de IA en Negocios", "Creación de prompts efectivos", "Generación de contenido comercial", "Automatización de correos y CRM", "Optimización de tareas repetitivas", "Proyecto final: Tu asistente digital"]
+    icon: "🏪",
+    title: "E-commerce & Tiendas Online en Aruba",
+    subtitle: "Ventas locales, pasarelas Sabí-Pay y logística de delivery insular",
+    description: "Crea tu tienda virtual, conecta cobros en Florines (AWG) y USD con Stripe, y automatiza entregas en los 5 distritos de Aruba.",
+    price: 0.00,
+    duration: "6 hrs",
+    rating: 4.9,
+    lecturesList: [
+      "Modelos de E-commerce y Hábitos de Consumo en Aruba",
+      "Configuración de Catálogo, Fotos y Precios en Florines",
+      "Pasarelas de Pago: Tarjetas, Sabí-Pay y Escrow",
+      "Logística de Despacho con Sabí-Delivery Express",
+      "Marketing Digital para Residentes y Turistas",
+      "Estrategias de Fidelización y Ventas Recurrentes"
+    ],
+    lecturesDetails: [
+      {
+        icon: "🏝️",
+        summary: "Análisis del mercado de consumo en Aruba: qué compran los residentes en Noord, Oranjestad y San Nicolas versus los turistas de hoteles y cruceros.",
+        takeaways: "Segmenta tu inventario entre artículos de alta rotación local y souvenirs/experiencias para viajeros."
+      },
+      {
+        icon: "📸",
+        summary: "Fotografía de producto con smartphone, iluminación natural del Caribe y estructuración de títulos optimizados para búsqueda.",
+        takeaways: "Fotos nítidas con fondo limpio aumentan la tasa de conversión en Sabí Marketplace un 42%."
+      },
+      {
+        icon: "💳",
+        summary: "Integración de cobros con tarjeta internacional, Apple Pay y billetera digital Sabí-Pay con protección de fondos en custodia.",
+        takeaways: "El sistema Escrow protege al comprador y te garantiza el pago neto al confirmar la entrega."
+      },
+      {
+        icon: "🛵",
+        summary: "Despacho insular sin flota propia: activación de alertas a repartidores motorizados verificados en tu zona.",
+        takeaways: "Empaqueta tus productos con sello de seguridad para entregas en menos de 45 minutos."
+      },
+      {
+        icon: "📱",
+        summary: "Publicidad en redes sociales con geolocalización precisa para Aruba (targeting por distrito y horarios de cruceros).",
+        takeaways: "Lanza promociones los días de alto flujo de cruceros para captar compras inmediatas en centro de Oranjestad."
+      },
+      {
+        icon: "⭐",
+        summary: "Sistemas de valoraciones, cupones de recompra y atención al cliente por WhatsApp Business.",
+        takeaways: "Mantén una reputación superior a 4.5 estrellas para figurar como Comercio Destacado en Sabí."
+      }
+    ]
   },
   {
     id: "curso-2",
     category: "business",
-    title: "E-commerce de Cero a Pro con Shopify y WooCommerce (Udemy)",
-    description: "Crea tu tienda virtual, conecta pasarelas de pago internacionales y gestiona la logística de importación desde la isla.",
-    price: 29.99,
-    duration: "16 hrs",
-    lectures: 7,
-    rating: 4.7,
-    lecturesList: ["Eligiendo plataforma: Shopify vs WordPress", "Configurando tu catálogo de productos", "Integración de Stripe y pagos locales", "Estrategias de envío a Aruba", "Marketing digital y redes sociales", "Pauta publicitaria básica", "Fidelización de clientes"]
+    icon: "🤖",
+    title: "Inteligencia Artificial para Negocios y Productividad",
+    subtitle: "Automatización de ventas, contenido comercial y soporte con IA",
+    description: "Aprende a usar ChatGPT, Midjourney y agentes de automatización para ahorrar horas de trabajo y multiplicar la capacidad de tu negocio.",
+    price: 0.00,
+    duration: "8 hrs",
+    rating: 4.8,
+    lecturesList: [
+      "Fundamentos de IA Generativa aplicados a PyMEs",
+      "Ingeniería de Prompts Comerciales de Alto Impacto",
+      "Creación de Copywriting y Anuncios Persuasivos",
+      "Automatización de Respuestas a Clientes en WhatsApp",
+      "Generación de Imágenes de Marca y Publicidad Visual",
+      "Agentes de IA: Tu Asistente Operativo 24/7"
+    ],
+    lecturesDetails: [
+      {
+        icon: "🧠",
+        summary: "Cómo los modelos de lenguaje transforman la atención al cliente, redacción comercial y análisis de datos en pequeñas empresas.",
+        takeaways: "La IA no reemplaza tu negocio, potencia al equipo para responder 10 veces más rápido."
+      },
+      {
+        icon: "✍️",
+        summary: "Técnicas avanzadas para dar instrucciones precisas a la IA con contexto de Aruba, tono amigable y ofertas irresistibles.",
+        takeaways: "Define siempre el rol, el público objetivo y el formato deseado en cada prompt."
+      },
+      {
+        icon: "📢",
+        summary: "Generación masiva de copys para Instagram, Facebook Ads y descripciones de producto que convierten visitas en ventas.",
+        takeaways: "Crea 30 publicaciones comerciales y descripciones de catálogo en menos de 15 minutos."
+      },
+      {
+        icon: "💬",
+        summary: "Flujos automatizados para cotizar, resolver dudas de horarios y coordinar entregas sin tener que responder manualmente.",
+        takeaways: "Reduce los tiempos de espera del cliente a cero segundos durante horas pico."
+      },
+      {
+        icon: "🎨",
+        summary: "Diseño de banners, fondos de producto y creatividades publicitarias con estilo profesional sin pagar diseñadores externos.",
+        takeaways: "Crea infografías y banners temáticos de temporada (Carnaval, Holidays, Fin de Semana)."
+      },
+      {
+        icon: "🚀",
+        summary: "Configuración de un asistente virtual privado que consulta tu inventario y ayuda en la toma de decisiones financieras.",
+        takeaways: "Tu negocio atiende clientes y cierra pedidos mientras descansas."
+      }
+    ]
   },
   // CATEGORY: finanzas (Finanzas)
   {
     id: "curso-3",
     category: "finanzas",
-    title: "Excel Completo: Tablas Dinámicas, Macros y Dashboards (Udemy)",
-    description: "La herramienta empresarial más demandada. Diseñado para dominar Excel desde lo básico hasta análisis de datos avanzado.",
-    price: 19.99,
+    icon: "🇨🇳",
+    title: "Importación Directa desde China (Alibaba & Cantón)",
+    subtitle: "Compras de fábrica, fletes marítimos y aduanas de Aruba",
+    description: "Guía completa para negociar con fabricantes en China, verificar proveedores con Trade Assurance y calcular aranceles de importación.",
+    price: 0.00,
     duration: "10 hrs",
-    lectures: 6,
-    rating: 4.6,
-    lecturesList: ["Fórmulas esenciales y referencias", "Tablas y gráficos dinámicos", "Funciones lógicas y de búsqueda", "Introducción a macros", "Creando un Dashboard financiero interactivo", "Tips de productividad en Excel"]
+    rating: 4.9,
+    lecturesList: [
+      "Búsqueda y Verificación de Proveedores Gold en Alibaba",
+      "Negociación de Precios FOB/CIF y Muestras de Fábrica",
+      "Pago Seguro con Trade Assurance y Cartas de Crédito",
+      "Logística de Flete Marítimo (FCL y LCL) hacia Aruba",
+      "Cálculo de Aranceles, Invoerrechten y BBO en Aduana",
+      "Desaduanaje en el Puerto de Barcadera y Distribución"
+    ],
+    lecturesDetails: [
+      {
+        icon: "🔎",
+        summary: "Cómo filtrar fábricas reales vs revendedores intermedios usando certificados de inspección y sellos verificados.",
+        takeaways: "Exige siempre proveedores con Verified Supplier y más de 3 años de antigüedad exportando."
+      },
+      {
+        icon: "📦",
+        summary: "Estrategias para solicitar muestras físicas antes de ordenar en volumen y pactar términos Incoterms convenientes.",
+        takeaways: "Siempre cotiza bajo término FOB para controlar tu propio flete marítimo hacia el Caribe."
+      },
+      {
+        icon: "🛡️",
+        summary: "Protección financiera mediante Trade Assurance de Alibaba: cómo asegurar que tu dinero no se libere hasta que el barco zarpe.",
+        takeaways: "Nunca pagues por fuera de la pasarela protegida para mantener garantía de reembolso."
+      },
+      {
+        icon: "🚢",
+        summary: "Rutas marítimas de China a Colón (Panamá) o Miami y conexión con Barcadera, Aruba. Tiempos y costos por CBM.",
+        takeaways: "El grupaje consolidado (LCL) te permite traer pallets de mercancía sin rentar un contenedor completo."
+      },
+      {
+        icon: "🧮",
+        summary: "Estructura tributaria arubiana: invoerrechten según código arancelario, BBO/BAVP y cálculo del valor CIF.",
+        takeaways: "Utiliza la Calculadora Sabí Import para prever el costo unitario puesto en tu almacén."
+      },
+      {
+        icon: "🏢",
+        summary: "Procedimiento de retiro de carga con agencias aduaneras locales, pago de almacenaje portuario y recepción.",
+        takeaways: "Ten tu factura comercial y Bill of Lading listos 5 días antes del arribo del buque."
+      }
+    ]
   },
   {
     id: "curso-4",
     category: "finanzas",
-    title: "Contabilidad para Emprendedores y Finanzas Corporativas (Udemy)",
-    description: "Aprende a interpretar estados financieros, calcular márgenes reales, separar flujos de dinero y planificar impuestos de tu PyME.",
-    price: 19.99,
-    duration: "8 hrs",
-    lectures: 5,
+    icon: "📊",
+    title: "Contabilidad Práctica y Finanzas para Emprendedores",
+    subtitle: "Control de flujo de caja, margen neto y planificación tributaria",
+    description: "Domina los números de tu negocio en Aruba. Separa finanzas personales, controla márgenes reales y prepara balances limpios.",
+    price: 0.00,
+    duration: "7 hrs",
     rating: 4.8,
-    lecturesList: ["Principios de contabilidad", "Estructura del balance general", "Estado de resultados y pérdidas", "Análisis de flujo de caja libre", "Planificación fiscal para pequeños negocios"]
+    lecturesList: [
+      "Separación de Finanzas Personales vs Finanzas de Empresa",
+      "Estructura del Flujo de Caja (Cash Flow) Semanal",
+      "Cálculo de Margen de Contribución y Punto de Equilibrio",
+      "Control de Cuentas por Cobrar y Cobros Morosos",
+      "Obligaciones Tributarias y Declaración de BBO en Aruba",
+      "Uso del Módulo Financiero de Sabí para PyMEs"
+    ],
+    lecturesDetails: [
+      {
+        icon: "⚖️",
+        summary: "El error #1 de los emprendedores: mezclar la billetera personal con los ingresos del negocio y cómo solucionarlo con cuentas separadas.",
+        takeaways: "Asígnate un sueldo fijo como dueño de negocio y reinvierte las utilidades netas."
+      },
+      {
+        icon: "💵",
+        summary: "Monitoreo del dinero líquido disponible para afrontar nómina, proveedores y compras de inventario sin asfixiar la empresa.",
+        takeaways: "Una empresa no quiebra por falta de ventas, quiebra por quedarse sin flujo de caja."
+      },
+      {
+        icon: "📈",
+        summary: "Fórmulas sencillas para conocer cuánto te cuesta vender un producto y cuánto volumen necesitas para no perder dinero.",
+        takeaways: "Conoce tu punto de equilibrio para saber qué día del mes comienzas a generar ganancias netas."
+      },
+      {
+        icon: "📑",
+        summary: "Políticas de cobro a clientes y adopción de pagos inmediatos mediante Sabí-Pay para eliminar la morosidad.",
+        takeaways: "Prefiere cobrar con pasarelas digitales directas antes que otorgar créditos informales."
+      },
+      {
+        icon: "🏛️",
+        summary: "Calendario impositivo en Aruba (Departamento di Impuesto): declaraciones mensuales de BBO/BAVP y registro de libros.",
+        takeaways: "Guarda automáticamente el porcentaje de impuestos de cada venta en una subcuenta de reserva."
+      },
+      {
+        icon: "💻",
+        summary: "Cómo registrar gastos, ingresos y presupuestos directamente en la pestaña de Contabilidad de Sabí.",
+        takeaways: "Mantén tus registros al día con solo 5 minutos diarios en la app."
+      }
+    ]
   },
   // CATEGORY: inversion (Inversión)
   {
     id: "curso-5",
     category: "inversion",
-    title: "Inversión en Bolsa, ETFs y Portafolios Pasivos (Udemy)",
-    description: "Descubre cómo invertir en los mercados globales de forma segura desde Aruba a través de brokers internacionales regulados.",
-    price: 34.99,
-    duration: "14 hrs",
-    lectures: 7,
+    icon: "🏖️",
+    title: "Airbnb & Inversión en Bienes Raíces en Aruba",
+    subtitle: "Rentas vacacionales, retornos por noche y gestión de huéspedes",
+    description: "Estrategias para invertir en propiedades en Aruba, optimizar alquileres vacacionales con alta ocupación y maximizar tu rentabilidad en USD.",
+    price: 0.00,
+    duration: "9 hrs",
     rating: 4.9,
-    lecturesList: ["Funcionamiento del mercado bursátil", "Criterios para elegir un broker", "El poder de los Fondos Indexados (ETFs)", "Estrategia DCA (Dollar Cost Averaging)", "Diversificación geográfica y por sectores", "Rebalanceo del portafolio", "Casos de éxito"]
-  },
-  {
-    id: "curso-6",
-    category: "inversion",
-    title: "Real Estate: Inversiones Inmobiliarias y Alquileres Vacacionales (Udemy)",
-    description: "Modelos de negocio para adquirir inmuebles, calcular tasas de rendimiento (Cap Rate) y optimizar tus anuncios en Airbnb en el Caribe.",
-    price: 39.99,
-    duration: "11 hrs",
-    lectures: 6,
-    rating: 4.7,
-    lecturesList: ["Análisis del mercado inmobiliario", "Cálculo de rentabilidad por alquiler", "Estrategia de administración remota", "REITs: Invirtiendo con bajo capital", "Técnicas de diseño para Airbnb", "Optimización de tarifas y reseñas"]
+    lecturesList: [
+      "Panorama del Mercado Inmobiliario en Noord, Palm Beach y Savaneta",
+      "Cálculo de Retorno de Inversión (Cap Rate y Cash on Cash)",
+      "Diseño y Fotografía de Interiores para Airbnb de Alto Valor",
+      "Automatización de Check-in, Limpieza y Mantenimiento",
+      "Estrategia de Precios Dinámicos según Temporada Turística",
+      "Gestión de Reseñas 5 Estrellas y Estatus Superhost"
+    ],
+    lecturesDetails: [
+      {
+        icon: "🗺️",
+        summary: "Zonas con mayor demanda de alquiler vacacional en Aruba, proximidad a playas y proyección de plusvalía.",
+        takeaways: "Propiedades a menos de 10 minutos de Palm Beach y Arashi concentran las tarifas por noche más elevadas."
+      },
+      {
+        icon: "📐",
+        summary: "Métricas esenciales para evaluar si una casa o condominio es un buen negocio antes de firmar la compra.",
+        takeaways: "Busca propiedades con retorno anual neto proyectado superior al 9% en dólares."
+      },
+      {
+        icon: "🛋️",
+        summary: "Cómo ambientar una propiedad con estética caribeña moderna que destaque en los resultados de búsqueda de turistas.",
+        takeaways: "La foto de portada y la piscina determinan el 70% de los clics de los turistas."
+      },
+      {
+        icon: "🔑",
+        summary: "Cerraduras inteligentes, guías digitales para huéspedes y coordinación con proveedores locales de limpieza y turnover.",
+        takeaways: "Automatiza la operativa para gestionar tus propiedades en menos de 2 horas a la semana."
+      },
+      {
+        icon: "💲",
+        summary: "Ajuste de tarifas por noche en base a la temporada alta (diciembre-abril), feriados y eventos especiales en la isla.",
+        takeaways: "Aumenta precios en fechas pico de vuelos y cruceros para maximizar ingresos."
+      },
+      {
+        icon: "🏆",
+        summary: "Protocolos de hospitalidad para recibir calificaciones perfectas que garanticen visibilidad en las primeras posiciones.",
+        takeaways: "Un mensaje de bienvenida con recomendaciones locales de Sabí genera propinas y reseñas entusiastas."
+      }
+    ]
   }
 ];
 
@@ -24886,8 +25076,10 @@ function renderSabiCourses() {
   const container = document.getElementById("sabi-courses-grid");
   if (!container) return;
 
-  const searchQuery = document.getElementById("courses-search-input").value.toLowerCase();
-  const filterCat = document.getElementById("courses-filter-category").value;
+  const searchInput = document.getElementById("courses-search-input");
+  const searchQuery = searchInput ? searchInput.value.toLowerCase() : "";
+  const filterSelect = document.getElementById("courses-filter-category");
+  const filterCat = filterSelect ? filterSelect.value : "all";
 
   let html = "";
   const filtered = SABI_CURSOS_DATA.filter(c => {
@@ -24897,30 +25089,48 @@ function renderSabiCourses() {
   });
 
   if (filtered.length === 0) {
-    html = `<div style="grid-column: 1/-1; text-align:center; color:var(--text-muted); padding:2rem">No se encontraron cursos que coincidan con la búsqueda.</div>`;
+    html = `<div style="grid-column: 1/-1; text-align:center; color:var(--text-muted); padding:2.5rem">No se encontraron cursos que coincidan con la búsqueda.</div>`;
   } else {
     filtered.forEach(c => {
-      const btnText = `Ver en Udemy — Afl. ${c.price.toFixed(2)}`;
-      const btnClass = "btn-cyan";
       const ratingStars = "⭐".repeat(Math.round(c.rating));
+      const progressKey = `sabi_progress_${c.id}`;
+      const completedList = JSON.parse(localStorage.getItem(progressKey) || '[]');
+      const pct = Math.round((completedList.length / c.lecturesList.length) * 100);
+      const isStarted = pct > 0;
+      const btnText = pct === 100 ? "🎓 Repasar Curso (Completado)" : (isStarted ? `Continuar (${pct}%)` : "▶️ Entrar al Aula");
 
       html += `
-        <div class="card purple-accent" style="display:flex; flex-direction:column; justify-content:space-between; gap:1rem; padding:1.25rem">
+        <div class="card purple-accent" style="display:flex; flex-direction:column; justify-content:space-between; gap:1rem; padding:1.35rem; border:1px solid rgba(181, 23, 158, 0.35); background:radial-gradient(circle at 10% 10%, rgba(26, 18, 56, 0.6) 0%, rgba(12, 8, 30, 0.9) 100%); border-radius:18px; box-shadow:0 8px 24px rgba(0,0,0,0.35)">
           <div>
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem">
-              <span style="font-size:0.6rem; background:rgba(192,132,252,0.15); border:1px solid #c084fc; color:#d8b4fe; padding:2px 8px; border-radius:12px; text-transform:uppercase">${c.category}</span>
-              <span style="font-size:0.7rem; color:var(--text-muted)">${c.duration}</span>
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem">
+              <span style="font-size:0.65rem; background:rgba(0, 243, 255, 0.12); border:1px solid var(--neon-cyan); color:var(--neon-cyan); padding:2px 10px; border-radius:12px; text-transform:uppercase; font-weight:800">${c.category}</span>
+              <span style="font-size:0.75rem; color:var(--text-muted); font-weight:600">⏱️ ${c.duration}</span>
             </div>
-            <h3 style="font-size:0.95rem; font-weight:800; color:white; line-height:1.3; min-height:2.6rem">${c.title}</h3>
-            <p style="font-size:0.75rem; color:var(--text-muted); line-height:1.4; margin:0.5rem 0 0.75rem 0; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden">${c.description}</p>
-            <div style="display:flex; align-items:center; gap:0.5rem; font-size:0.7rem">
-              <span style="color:var(--neon-gold)">${ratingStars}</span>
-              <span style="color:var(--text-muted)">(${c.rating})</span>
-              <span style="color:var(--text-muted)">•</span>
-              <span style="color:var(--text-muted)">${c.lecturesList.length} clases</span>
+            
+            <div style="display:flex; align-items:center; gap:0.5rem; margin-bottom:0.4rem">
+              <span style="font-size:1.6rem">${c.icon || '🎓'}</span>
+              <h3 style="font-size:1.05rem; font-weight:800; color:white; line-height:1.3; margin:0">${c.title}</h3>
+            </div>
+            
+            <p style="font-size:0.8rem; color:#cbd5e1; line-height:1.45; margin:0.5rem 0 0.85rem 0; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden">${c.description}</p>
+            
+            <div style="display:flex; align-items:center; justify-content:space-between; font-size:0.75rem; padding-top:0.5rem; border-top:1px solid var(--glass-border)">
+              <div style="display:flex; align-items:center; gap:0.4rem">
+                <span style="color:var(--neon-gold)">${ratingStars}</span>
+                <span style="color:var(--text-muted); font-weight:700">(${c.rating})</span>
+              </div>
+              <span style="color:var(--neon-cyan); font-weight:700">📚 ${c.lecturesList.length} lecciones</span>
+            </div>
+
+            <!-- Mini Barra de Progreso -->
+            <div style="margin-top:0.75rem; height:5px; background:rgba(255,255,255,0.06); border-radius:3px; overflow:hidden">
+              <div style="width:${pct}%; height:100%; background:linear-gradient(90deg, var(--neon-cyan), var(--neon-purple)); border-radius:3px; transition:width 0.3s"></div>
             </div>
           </div>
-          <button class="btn ${btnClass} btn-sm" onclick="window.handleCourseAction('${c.id}')" style="width:100%; font-weight:bold">${btnText}</button>
+          
+          <button class="btn btn-cyan btn-sm" onclick="window.openCoursePlayer('${c.id}')" style="width:100%; font-weight:800; padding:8px 0; border-radius:12px; box-shadow:0 0 14px rgba(0,243,255,0.3)">
+            ${btnText}
+          </button>
         </div>
       `;
     });
@@ -24930,25 +25140,11 @@ function renderSabiCourses() {
 }
 
 function handleCourseAction(id) {
-  const course = SABI_CURSOS_DATA.find(c => c.id === id);
-  if (!course) return;
-
-  try {
-    SoundEffects.playClick();
-  } catch(e) {}
-
-  showToast("Redirigiendo a Udemy...", "Cargando curso con certificación y descuento exclusivo de Sabí.");
-  const query = encodeURIComponent(course.title);
-  const affiliateUrl = `https://www.udemy.com/courses/search/?q=${query}&utm_source=affiliate&utm_medium=sabi_aruba&aff_id=sabi_affiliate`;
-
-  setTimeout(() => {
-    window.open(affiliateUrl, "_blank");
-  }, 1200);
+  openCoursePlayer(id);
 }
 
 function buySabiCourse(id) {
-  // Mantener firma para compatibilidad retroactiva, redirigir a handleCourseAction
-  handleCourseAction(id);
+  openCoursePlayer(id);
 }
 
 // Course Player State
@@ -24966,10 +25162,12 @@ function openCoursePlayer(courseId) {
   simulatedVideoProgress = 0;
   if (simulatedVideoTimer) clearInterval(simulatedVideoTimer);
 
-  document.getElementById("player-course-category").innerText = course.category.toUpperCase();
-  document.getElementById("player-course-title").innerText = course.title;
+  const catEl = document.getElementById("player-course-category");
+  if (catEl) catEl.innerText = course.category.toUpperCase();
   
-  // Load progress
+  const titleEl = document.getElementById("player-course-title");
+  if (titleEl) titleEl.innerText = `${course.icon || '🎓'} ${course.title}`;
+  
   const progressKey = `sabi_progress_${courseId}`;
   const completedList = JSON.parse(localStorage.getItem(progressKey) || '[]');
   
@@ -24977,14 +25175,24 @@ function openCoursePlayer(courseId) {
   loadLecture(0);
 
   const modal = document.getElementById("course-player-modal");
-  modal.style.display = "flex";
-  modal.classList.add("active");
+  if (modal) {
+    modal.style.display = "flex";
+    modal.classList.add("active");
+  }
+
+  try {
+    SoundEffects.playClick();
+  } catch(e) {}
 }
 
 function closeCoursePlayer() {
   if (simulatedVideoTimer) clearInterval(simulatedVideoTimer);
-  document.getElementById("course-player-modal").style.display = "none";
-  document.getElementById("course-player-modal").classList.remove("active");
+  const modal = document.getElementById("course-player-modal");
+  if (modal) {
+    modal.style.display = "none";
+    modal.classList.remove("active");
+  }
+  renderSabiCourses();
 }
 
 function loadLecture(idx) {
@@ -24995,41 +25203,75 @@ function loadLecture(idx) {
   simulatedVideoProgress = 0;
   if (simulatedVideoTimer) clearInterval(simulatedVideoTimer);
 
-  document.getElementById("video-sim-progress").style.width = "0%";
-  document.getElementById("video-sim-overlay").style.display = "block";
-  document.getElementById("video-sim-status").innerText = "Haz clic para iniciar la clase";
-  document.getElementById("player-lecture-num").innerText = `Clase ${idx + 1}`;
-  document.getElementById("player-lecture-title").innerText = course.lecturesList[idx];
+  const progEl = document.getElementById("video-sim-progress");
+  if (progEl) progEl.style.width = "0%";
+  
+  const overlayEl = document.getElementById("video-sim-overlay");
+  if (overlayEl) overlayEl.style.display = "flex";
+  
+  const statusEl = document.getElementById("video-sim-status");
+  if (statusEl) statusEl.innerText = "Haz clic para iniciar la clase interactiva";
+  
+  const numEl = document.getElementById("player-lecture-num");
+  if (numEl) numEl.innerText = `CLASE ${idx + 1} DE ${course.lecturesList.length}`;
+  
+  const lecTitleEl = document.getElementById("player-lecture-title");
+  if (lecTitleEl) lecTitleEl.innerText = course.lecturesList[idx];
+
+  const detail = (course.lecturesDetails && course.lecturesDetails[idx]) || {
+    icon: "💡",
+    summary: "Aprende los fundamentos y estrategias prácticas aplicadas al comercio de Aruba.",
+    takeaways: "Aplica estas recomendaciones para potenciar la rentabilidad de tu negocio en Sabí."
+  };
+
+  const iconEl = document.getElementById("player-lecture-icon");
+  if (iconEl) iconEl.innerText = detail.icon || "💡";
+
+  const summaryEl = document.getElementById("player-lecture-summary");
+  if (summaryEl) summaryEl.innerText = detail.summary;
+
+  const takeawaysEl = document.getElementById("player-lecture-takeaways");
+  if (takeawaysEl) takeawaysEl.innerText = detail.takeaways;
 
   // Highlight active
   document.querySelectorAll(".lecture-item").forEach((el, index) => {
-    el.style.background = index === idx ? "rgba(0, 243, 255, 0.08)" : "transparent";
+    el.style.background = index === idx ? "rgba(0, 243, 255, 0.12)" : "rgba(255,255,255,0.02)";
     el.style.borderColor = index === idx ? "var(--neon-cyan)" : "var(--glass-border)";
   });
 }
 
 function playSimulatedLecture() {
-  document.getElementById("video-sim-overlay").style.display = "none";
+  const overlayEl = document.getElementById("video-sim-overlay");
+  if (overlayEl) overlayEl.style.display = "none";
+  
   simulatedVideoProgress = 0;
   if (simulatedVideoTimer) clearInterval(simulatedVideoTimer);
 
+  try {
+    SoundEffects.playClick();
+  } catch(e) {}
+
   simulatedVideoTimer = setInterval(() => {
-    simulatedVideoProgress += 2.5; // reaches 100% in 4 seconds
-    document.getElementById("video-sim-progress").style.width = `${simulatedVideoProgress}%`;
+    simulatedVideoProgress += 2.5; // Comprueba lección en 4 segundos
+    const progEl = document.getElementById("video-sim-progress");
+    if (progEl) progEl.style.width = `${simulatedVideoProgress}%`;
 
     if (simulatedVideoProgress >= 100) {
       clearInterval(simulatedVideoTimer);
-      // Mark as completed
       window.markLectureCompleted(activePlayerCourseId, activeLectureIndex);
-      showToast("¡Clase Completada!", "Excelente progreso en tu aprendizaje.");
-      SoundEffects.playClick();
       
-      // Auto play next if exists
+      try {
+        SoundEffects.playJingle();
+      } catch(e) {}
+      
+      showToast("¡Clase Completada!", "Excelente progreso en Sabí Cursos.");
+      
+      // Pasar a la siguiente clase automáticamente si existe
       const course = SABI_CURSOS_DATA.find(c => c.id === activePlayerCourseId);
       if (course && activeLectureIndex < course.lecturesList.length - 1) {
         setTimeout(() => {
           loadLecture(activeLectureIndex + 1);
-        }, 1000);
+        }, 1200);
       }
     }
   }, 100);
@@ -25072,7 +25314,135 @@ function renderPlayerLectures(course, completedList) {
   if (!listContainer) return;
 
   const pct = Math.round((completedList.length / course.lecturesList.length) * 100);
-  document.getElementById("player-progress-pct").innerText = `${pct}%`;
+  const pctEl = document.getElementById("player-progress-pct");
+  if (pctEl) pctEl.innerText = `${pct}%`;
+
+  let html = "";
+  course.lecturesList.forEach((lec, idx) => {
+    const isCompleted = completedList.includes(idx);
+    const checkedAttr = isCompleted ? "checked" : "";
+    const detail = (course.lecturesDetails && course.lecturesDetails[idx]) || {};
+    const icon = detail.icon || "📖";
+
+    html += `
+      <div class="lecture-item" style="display:flex; align-items:center; justify-content:space-between; padding:0.65rem 0.85rem; border:1px solid var(--glass-border); border-radius:12px; gap:0.75rem; transition:all 0.2s; cursor:pointer; background:rgba(255,255,255,0.02)" onclick="window.loadLecture(${idx})">
+        <div style="display:flex; align-items:center; gap:0.5rem; min-width:0">
+          <span style="font-size:1.1rem">${icon}</span>
+          <div style="min-width:0">
+            <span style="font-size:0.65rem; color:var(--text-muted); text-transform:uppercase; font-weight:700; display:block">Clase ${idx + 1}</span>
+            <span style="font-size:0.8rem; font-weight:700; color:white; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; display:block">${lec}</span>
+          </div>
+        </div>
+        <input type="checkbox" ${checkedAttr} onclick="event.stopPropagation(); window.toggleLectureCompleted(${idx})" style="cursor:pointer; width:18px; height:18px; accent-color:var(--neon-cyan)">
+      </div>
+    `;
+  });
+
+  listContainer.innerHTML = html;
+}
+
+// ==========================================================================
+// 🏢 GESTIÓN DE CUPONES COMERCIALES (SABI1YEAR - 1 AÑO FREE PARA NEGOCIOS)
+// ==========================================================================
+
+function activateBusinessCoupon() {
+  const input = document.getElementById("business-coupon-input");
+  if (!input) return;
+
+  const code = input.value.trim().toUpperCase();
+  if (!code) {
+    showToast("Ingresa un Cupón", "Por favor escribe el código del cupón comercial.");
+    return;
+  }
+
+  const validCoupons = ["SABI1YEAR", "ARUBAFREE365", "SABIBUSINESS"];
+  
+  if (validCoupons.includes(code)) {
+    // Activar suscripción de comercio por 365 días
+    const oneYearFromNow = new Date();
+    oneYearFromNow.setFullYear(oneYearFromNow.getFullYear() + 1);
+
+    const businessProfile = {
+      isVerifiedBusiness: true,
+      couponCode: code,
+      activatedAt: new Date().toISOString(),
+      expiresAt: oneYearFromNow.toISOString(),
+      plan: "Comercio Verificado Sabí (1 Año Free)",
+      annualSavingsAwg: 588.00
+    };
+
+    localStorage.setItem("sabi_business_subscription", JSON.stringify(businessProfile));
+
+    try {
+      SoundEffects.playJingle();
+    } catch(e) {}
+
+    showToast("🎉 ¡Tienda Activada con Éxito!", "Cupón SABI1YEAR canjeado. Tu comercio tiene 1 año de membresía gratis y estatus verificado.");
+
+    // Actualizar el banner visual
+    const banner = document.getElementById("comercio-coupon-banner");
+    if (banner) {
+      banner.style.border = "1.5px solid var(--neon-cyan)";
+      banner.style.background = "linear-gradient(135deg, rgba(0,243,255,0.12) 0%, rgba(20,14,45,0.9) 100%)";
+      banner.innerHTML = `
+        <div style="display:flex; align-items:center; gap:0.85rem; flex:1">
+          <div style="width:48px; height:48px; border-radius:12px; background:rgba(0,243,255,0.2); border:1px solid var(--neon-cyan); display:flex; justify-content:center; align-items:center; font-size:1.6rem">
+            ✅
+          </div>
+          <div>
+            <strong style="font-size:1.05rem; color:var(--neon-cyan); display:block">Comercio Verificado Sabí Activo</strong>
+            <span style="font-size:0.8rem; color:#cbd5e1">Suscripción anual gratuita activa hasta ${oneYearFromNow.toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' })}.</span>
+          </div>
+        </div>
+        <div style="display:flex; gap:0.5rem">
+          <button type="button" onclick="window.switchTab('comunidad'); setTimeout(() => { const btn = document.getElementById('comunidad-tab-btn-market'); if(btn) btn.click(); }, 150);" class="btn btn-cyan" style="font-weight:800; padding:0.6rem 1.2rem; border-radius:10px">
+            🛍️ Publicar Productos en Marketplace
+          </button>
+        </div>
+      `;
+    }
+  } else {
+    try {
+      SoundEffects.playAlert();
+    } catch(e) {}
+    showToast("Cupón Inválido", "El código ingresado no existe o ha expirado. Utiliza SABI1YEAR.");
+  }
+}
+
+// Verificar si ya tiene el cupón activo al cargar la pestaña
+function checkBusinessCouponState() {
+  const saved = localStorage.getItem("sabi_business_subscription");
+  if (!saved) return;
+
+  try {
+    const data = JSON.parse(saved);
+    const expires = new Date(data.expiresAt);
+    if (expires > new Date()) {
+      const banner = document.getElementById("comercio-coupon-banner");
+      if (banner) {
+        banner.style.border = "1.5px solid var(--neon-cyan)";
+        banner.style.background = "linear-gradient(135deg, rgba(0,243,255,0.12) 0%, rgba(20,14,45,0.9) 100%)";
+        banner.innerHTML = `
+          <div style="display:flex; align-items:center; gap:0.85rem; flex:1">
+            <div style="width:48px; height:48px; border-radius:12px; background:rgba(0,243,255,0.2); border:1px solid var(--neon-cyan); display:flex; justify-content:center; align-items:center; font-size:1.6rem">
+              ✅
+            </div>
+            <div>
+              <strong style="font-size:1.05rem; color:var(--neon-cyan); display:block">Comercio Verificado Sabí Activo</strong>
+              <span style="font-size:0.8rem; color:#cbd5e1">Suscripción anual gratuita activa hasta ${expires.toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' })}.</span>
+            </div>
+          </div>
+          <div style="display:flex; gap:0.5rem">
+            <button type="button" onclick="window.switchTab('comunidad'); setTimeout(() => { const btn = document.getElementById('comunidad-tab-btn-market'); if(btn) btn.click(); }, 150);" class="btn btn-cyan" style="font-weight:800; padding:0.6rem 1.2rem; border-radius:10px">
+              🛍️ Publicar Productos en Marketplace
+            </button>
+          </div>
+        `;
+      }
+    }
+  } catch(e) {}
+}
+
 
   let html = "";
   course.lecturesList.forEach((lec, idx) => {

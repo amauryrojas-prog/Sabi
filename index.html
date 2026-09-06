@@ -1444,6 +1444,25 @@
             <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:1.5rem" data-i18n="services_commerce_subtitle">
               Monitoreo del tráfico peatonal y consumo comercial estimado por áreas de desarrollo de Aruba.
             </p>
+
+            <!-- Banner Exclusivo: Cupón 1 Año Free para Comercios de Aruba -->
+            <div id="comercio-coupon-banner" style="background:linear-gradient(135deg, rgba(255,215,0,0.12) 0%, rgba(255,0,128,0.08) 100%); border:1.5px solid var(--neon-gold); border-radius:16px; padding:1.25rem; margin-bottom:1.5rem; display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:1rem; box-shadow:0 6px 20px rgba(0,0,0,0.35)">
+              <div style="flex:1; min-width:260px">
+                <div style="display:flex; align-items:center; gap:0.5rem; margin-bottom:0.25rem">
+                  <span style="font-size:1.3rem">🏢</span>
+                  <strong style="font-size:1rem; color:var(--neon-gold)">¿Tienes un Negocio en Aruba? ¡Actívalo 1 Año Gratis!</strong>
+                </div>
+                <p style="font-size:0.8rem; color:var(--text-muted); margin:0; line-height:1.4">
+                  Únete a la red comercial de Sabí. Publica tus productos, recibe pedidos con <strong>Sabí-Pay</strong> y despacha con <strong>Sabí-Delivery</strong>. Ahorro de <strong style="color:white">Afl. 588 / año</strong>.
+                </p>
+              </div>
+              <div style="display:flex; gap:0.5rem; align-items:center; flex-wrap:wrap">
+                <input type="text" id="business-coupon-input" placeholder="Código (ej. SABI1YEAR)" value="SABI1YEAR" style="padding:0.6rem 0.85rem; border-radius:10px; border:1px solid var(--neon-gold); background:rgba(0,0,0,0.4); color:var(--neon-gold); font-weight:800; font-size:0.85rem; text-transform:uppercase; max-width:170px; text-align:center">
+                <button type="button" onclick="window.activateBusinessCoupon()" class="btn btn-gold" style="font-weight:900; padding:0.6rem 1.2rem; border-radius:10px; box-shadow:0 0 12px rgba(255,215,0,0.35)">
+                  🚀 Canjear y Activar
+                </button>
+              </div>
+            </div>
             
             <div class="form-group" style="margin-bottom:1.5rem">
               <label for="comercio-timeframe" data-i18n="services_commerce_period_label">Periodo de Análisis</label>
@@ -2505,6 +2524,90 @@
           </h3>
           <button onclick="closeMediationPolicyModal()" style="background:none; border:none; color:var(--text-muted); font-size:1.3rem; cursor:pointer">&times;</button>
         </div>
+
+    <!-- MODAL: REPRODUCTOR INTERACTIVO SABÍ CURSOS -->
+    <div id="course-player-modal" class="modal-overlay" style="z-index:10000; display:none">
+      <div class="modal-card" style="max-width: 860px; width:95%; background:radial-gradient(circle at 10% 10%, #1a1238 0%, #0c081e 100%); border:1.5px solid var(--neon-purple); box-shadow:0 0 35px rgba(181, 23, 158, 0.35); border-radius:20px; max-height:90vh; display:flex; flex-direction:column; overflow:hidden">
+        
+        <!-- Header del Reproductor -->
+        <div style="display:flex; justify-content:space-between; align-items:center; padding:1.2rem 1.5rem; border-bottom:1px solid var(--glass-border)">
+          <div>
+            <span id="player-course-category" style="font-size:0.65rem; background:rgba(0, 243, 255, 0.15); border:1px solid var(--neon-cyan); color:var(--neon-cyan); padding:2px 10px; border-radius:12px; font-weight:800; text-transform:uppercase">BUSINESS</span>
+            <h3 id="player-course-title" style="font-size:1.15rem; font-weight:800; color:white; margin:4px 0 0 0">Título del Curso</h3>
+          </div>
+          <button type="button" onclick="window.closeCoursePlayer()" style="background:none; border:none; color:var(--text-muted); font-size:1.8rem; cursor:pointer; line-height:1">&times;</button>
+        </div>
+
+        <!-- Cuerpo Dividido: Pantalla Interactiva + Temario -->
+        <div style="display:grid; grid-template-columns:1.6fr 1fr; gap:1.25rem; padding:1.5rem; overflow-y:auto; flex:1">
+          
+          <!-- Columna Izquierda: Pantalla de Video / Infografía Inteligente -->
+          <div style="display:flex; flex-direction:column; gap:1rem">
+            <div id="player-screen-wrapper" style="position:relative; width:100%; aspect-ratio:16/9; background:#070512; border:1px solid var(--glass-border); border-radius:14px; overflow:hidden; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; padding:1.5rem; box-shadow:inset 0 0 30px rgba(0,0,0,0.8)">
+              
+              <!-- Barra de Progreso Superior del Video -->
+              <div style="position:absolute; top:0; left:0; width:100%; height:4px; background:rgba(255,255,255,0.08)">
+                <div id="video-sim-progress" style="height:100%; width:0%; background:linear-gradient(90deg, var(--neon-cyan), var(--neon-purple)); transition:width 0.15s ease"></div>
+              </div>
+
+              <!-- Infografía Dinámica de la Clase -->
+              <div id="player-infographic-content" style="z-index:1; max-width:90%">
+                <div id="player-lecture-icon" style="font-size:3rem; margin-bottom:0.5rem">💡</div>
+                <div id="player-lecture-num" style="font-size:0.75rem; color:var(--neon-cyan); font-weight:800; text-transform:uppercase; letter-spacing:1px">CLASE 1</div>
+                <h4 id="player-lecture-title" style="font-size:1.15rem; font-weight:900; color:white; margin:4px 0 0.75rem 0">Fundamentos</h4>
+                <div id="player-lecture-summary" style="font-size:0.8rem; color:#cbd5e1; line-height:1.45; background:rgba(255,255,255,0.03); border:1px solid var(--glass-border); border-radius:10px; padding:0.75rem">
+                  Haz clic en Iniciar Clase para visualizar las diapositivas interactivas y material de apoyo.
+                </div>
+              </div>
+
+              <!-- Overlay Play -->
+              <div id="video-sim-overlay" onclick="window.playSimulatedLecture()" style="position:absolute; inset:0; background:rgba(7,5,18,0.7); display:flex; flex-direction:column; justify-content:center; align-items:center; cursor:pointer; z-index:2; backdrop-filter:blur(2px)">
+                <div style="width:64px; height:64px; border-radius:50%; background:linear-gradient(135deg, var(--neon-cyan), var(--neon-purple)); display:flex; justify-content:center; align-items:center; font-size:24px; box-shadow:0 0 25px rgba(0, 243, 255, 0.6); margin-bottom:0.6rem">
+                  ▶️
+                </div>
+                <span id="video-sim-status" style="font-size:0.85rem; font-weight:800; color:white">Haz clic para iniciar la clase</span>
+              </div>
+            </div>
+
+            <!-- Notas de Clase / Tips Clave -->
+            <div style="background:rgba(255,255,255,0.02); border:1px solid var(--glass-border); border-radius:12px; padding:0.85rem">
+              <strong style="font-size:0.8rem; color:var(--neon-gold); display:flex; align-items:center; gap:0.4rem; margin-bottom:0.35rem">
+                📌 Puntos Clave de la Lección
+              </strong>
+              <div id="player-lecture-takeaways" style="font-size:0.78rem; color:var(--text-muted); line-height:1.4">
+                Aprende conceptos fundamentales aplicados al mercado local de Aruba y modelos escalables por internet.
+              </div>
+            </div>
+          </div>
+
+          <!-- Columna Derecha: Temario & Checklist de Progreso -->
+          <div style="display:flex; flex-direction:column; gap:0.75rem">
+            <div style="display:flex; justify-content:space-between; align-items:center">
+              <span style="font-size:0.8rem; font-weight:800; color:white">Temario del Curso</span>
+              <span id="player-progress-pct" style="font-size:0.8rem; font-weight:800; color:var(--neon-cyan)">0%</span>
+            </div>
+
+            <!-- Lista de Clases -->
+            <div id="player-lectures-list" style="display:flex; flex-direction:column; gap:0.5rem; max-height:360px; overflow-y:auto; padding-right:4px; scrollbar-width:thin">
+              <!-- Inyectado por JS -->
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Footer del Modal -->
+        <div style="padding:1rem 1.5rem; border-top:1px solid var(--glass-border); display:flex; justify-content:space-between; align-items:center; background:rgba(0,0,0,0.2)">
+          <div style="font-size:0.75rem; color:var(--text-muted); display:flex; align-items:center; gap:0.4rem">
+            🦉 <span>Certificado Oficial Sabí emitido al completar el 100%.</span>
+          </div>
+          <button type="button" onclick="window.closeCoursePlayer()" class="btn btn-cyan btn-sm" style="font-weight:800; padding:6px 20px; border-radius:20px">
+            Cerrar Aula
+          </button>
+        </div>
+
+      </div>
+    </div>
+
         <div style="font-size:0.75rem; color:var(--text-main); line-height:1.5; display:flex; flex-direction:column; gap:0.75rem; max-height:360px; overflow-y:auto; padding-right:5px; scrollbar-width:thin">
           <p>Para garantizar intercambios P2P transparentes y libres de fraudes en Aruba, Sabí implementa una <strong>Custodia y Mediación Arbitrada</strong>.</p>
           
@@ -2811,6 +2914,6 @@
       }
     }
   </style>
-  <script src="app_v3.js?v=78"></script>
+  <script src="app_v3.js?v=79"></script>
 </body>
 </html>
